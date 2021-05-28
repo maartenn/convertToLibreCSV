@@ -27,18 +27,6 @@
 			<a href="configurexdriptidepool.html">How-to configure xdrip to connect to Tidepool</a>
 		</p>
 
-		<h3>Additional notes</h3>
-		<ul>
-			<li>Use at your own risk!</li>
-			<li>Textarea might be slow when a huge amount of data is displayed, for copying the output to your clipboard you can use the copy-button</li>
-			<li>Your data will not be uploaded to my server! All conversion is done on your device and I won't have any of your data.</li>
-			<li>Be careful when using your clipboard for copy/paste and clean it whenever possible</li>
-			<li>I use the Dutch header in the CSV, most specific-made CSV parsers don't read the headers so I don't think this will be a problem.</li>
-			<li>I'm not associated with Abbot or Tidepool. I'm just trying to fill a gap between them.</li>
-			<li>Want to check or even improve the code? this website is opensource (link to github)</li>
-			<li>If you have any questions / suggestions please let me know on github or contact me via email: mnaberink@gmail.com</li>
-		</ul>
-
 		<h2>Step 1: Input via text or file</h2>
 		<section class="alert-box">
 			<p>
@@ -53,12 +41,33 @@
 		<section class="alert-box -error" id="sectionNoData">
 			<p>Please provide data before trying to convert it</p>			
 		</section>	
+		<section class="alert-box -error" id="sectionInvalidData">
+			<p>The given JSON data couldn't be converted</p>			
+		</section>	
+		<section class="alert-box -error" id="sectionInvalidJson">
+			<p>The data provided couldn't be parsed as JSON</p>			
+		</section>	
+		
 		<div id="outputContainer">
 			<h2>Converted output</h2>
 			<textarea rows="15" id="textOutput"></textarea>
 			<h2>Step 3: <button id="btnCopyClipboard">copy output to clipboard</button> OR 
 			<button id="btnDownload">download output as CSV file</button></h2>
 		</div>
+		<br>
+		<hr>
+		<br>
+		<h2>Additional notes</h2>
+		<ul>
+			<li>Use at your own risk!</li>
+			<li>Textarea might be slow when a huge amount of data is displayed, for copying the output to your clipboard you can use the copy-button</li>
+			<li>Your data will not be uploaded to my server! All conversion is done on your device and I won't have any of your data.</li>
+			<li>Be careful when using your clipboard for copy/paste and clean it whenever possible</li>
+			<li>I use the Dutch header in the CSV, most specific-made CSV parsers don't read the headers so I don't think this will be a problem.</li>
+			<li>I'm not associated with Abbot or Tidepool. I'm just trying to fill a gap between them.</li>
+			<li>Want to check or even improve the code? this website is opensource <a href="https://github.com/maartenn/convertToLibreCSV">https://github.com/maartenn/convertToLibreCSV</a></li>
+			<li>If you have any questions / suggestions please let me know on github or contact me via email: mnaberink AT gmail.com</li>
+		</ul>
 	</div>
 </body>
 
