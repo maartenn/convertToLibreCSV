@@ -2,21 +2,27 @@ $(function(){
 	
 	// Event listeners
 	$('#inputFile').change(function(e) {
+		hideErrors();
 		readSingleFile(e);
 	});
 
 	$("#btnConvert").click(function() {
 		let text = $('#textInput').val().trim();
 		$('#outputContainer').hide();
+		hideErrors();
 
 		if(text.length>1){
-			$('#sectionNoData').hide();
-			let data = JSON.parse(text);
-			convertFile(data);
+			try{
+				let data = JSON.parse(text);
+				convertFile(data);
+
+			} catch (e) {
+				$('#sectionInvalidJson').show();	
+				scrollToBottom();
+			}
 		}
 		else { 
 			$('#sectionNoData').show();	
-		
 			scrollToBottom();
 		}
 	});
@@ -49,7 +55,8 @@ $(function(){
 		reader.readAsText(file);
 	}
 
-	function convertFile(data){		
+	function convertFile(data){	
+		hideErrors();	
 		var newArray = [];
 		const nowFormatted = formatDateToStringUTC(new Date(new Date().getTime())); 
 		newArray.push(`Glucosegegevens,Gegenereerd op,${nowFormatted} UTC,Gegenereerd door,Parser`);
@@ -57,13 +64,18 @@ $(function(){
 		
 		for(var i = data.length-1; i>0;i--) {
 			if (data[i].value!=null){
-				const glucosemmol = data[i].value.toFixed(1).toString().replace(/\./g, ',');
-				
-				const datetime = new Date(data[i].deviceTime);
-				const formattedDatetime = formatDateToStringLocalZone(datetime);
-				const line = `Freestyle Librelink,1dfda99d-dbdd-4d2e-a88b-6a56d5e29403,${formattedDatetime},0,"${glucosemmol}",,,,,,,,,,,,,,`;
-				
-				newArray.push(line);				
+				try {
+					const glucosemmol = data[i].value.toFixed(1).toString().replace(/\./g, ',');
+					
+					const datetime = new Date(data[i].deviceTime);
+					const formattedDatetime = formatDateToStringLocalZone(datetime);
+					const line = `Freestyle Librelink,1dfda99d-dbdd-4d2e-a88b-6a56d5e29403,${formattedDatetime},0,"${glucosemmol}",,,,,,,,,,,,,,`;
+					
+					newArray.push(line);		
+				}		
+				catch(e) {
+					$('#sectionInvalidData').show();	
+				}
 			}
 		}
 		
@@ -109,8 +121,14 @@ $(function(){
 		
 		URL.revokeObjectURL(a.href);
 	}
+	function hideErrors(){
+		$('#sectionNoData').hide();
+		$('#sectionInvalidJson').hide();
+		$('#sectionInvalidData').hide();
+	}
 
 	// init page
 	$('#outputContainer').hide();
-	$('#sectionNoData').hide();
+	hideErrors();
+
 });
