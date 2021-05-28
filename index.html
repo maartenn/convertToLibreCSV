@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>Tidepool JSON to Freestyle Libre CSV</title>
+    <meta charset="UTF-8">
+    <script src="js/jquery.min.js"></script>
+	<script src="js/index.js"></script>
+ 
+
+	<link target="_blank" rel="stylesheet" href="css/concise.min.css">
+	<link rel="stylesheet" href="css/concise-ui.min.css">
+
+</head>
+ 
+<body>
+	<div container>
+		<h1>Tidepool JSON to Freestyle Libre CSV</h1>
+		<p>This tool will help you to convert your exported Tidepool data to the csv format used by Libreview. I created this website because my diabetes healthcare professional wants me to upload my cgm data in the Freestyle libre format but because I patched the app it doesn't send any data to the offical libreview anymore.</p>
+
+		<h3>Help articles</h3>
+		<p>
+			I wrote some articles that might help you to get the data<br>
+			<br>
+			<!-- <a href="howtoconvert.html">How-to use this website?</a> <br> -->
+			<a href="tidepoolexport.html">How-to export data from tidepool and import here?</a> <br>
+			<a href="configurexdriptidepool.html">How-to configure xdrip to connect to Tidepool</a>
+		</p>
+
+		<h3>Additional notes</h3>
+		<ul>
+			<li>Use at your own risk!</li>
+			<li>Textarea might be slow when a huge amount of data is displayed, for copying the output to your clipboard you can use the copy-button</li>
+			<li>Your data will not be uploaded to my server! All conversion is done on your device and I won't have any of your data.</li>
+			<li>Be careful when using your clipboard for copy/paste and clean it whenever possible</li>
+			<li>I use the Dutch header in the CSV, most specific-made CSV parsers don't read the headers so I don't think this will be a problem.</li>
+			<li>I'm not associated with Abbot or Tidepool. I'm just trying to fill a gap between them.</li>
+			<li>Want to check or even improve the code? this website is opensource (link to github)</li>
+			<li>If you have any questions / suggestions please let me know on github or contact me via email: mnaberink@gmail.com</li>
+		</ul>
+
+		<h2>Step 1: Input via text or file</h2>
+		<section class="alert-box">
+			<p>
+				<img src="img/read-file.png">
+				<input type="file" name="filepicker" id="inputFile">
+			</p>
+		</section>
+		<br><br>
+		<textarea rows="15" id="textInput" placeholder="Paste your text here or use the filepicker to read a json file"></textarea>
+		
+		<h2>Step 2 : <button id="btnConvert" name="parse">convert data</button> </h2>
+		<section class="alert-box -error" id="sectionNoData">
+			<p>Please provide data before trying to convert it</p>			
+		</section>	
+		<div id="outputContainer">
+			<h2>Converted output</h2>
+			<textarea rows="15" id="textOutput"></textarea>
+			<h2>Step 3: <button id="btnCopyClipboard">copy output to clipboard</button> OR 
+			<button id="btnDownload">download output as CSV file</button></h2>
+		</div>
+	</div>
+</body>
+
+</html>
+ 
